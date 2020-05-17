@@ -8,6 +8,7 @@ using FPS.Input;
 
 public class Astroid : GunnerTrigger, IAstroidActions
 {
+    #region Parameters / Objects / Variables
     [SerializeField]
     private GameObject CubePrefab;
     private List<AstroidCube> Cubes = new List<AstroidCube>();
@@ -58,26 +59,31 @@ public class Astroid : GunnerTrigger, IAstroidActions
 
     // Variables
     private WorldTriggerInputs PlayerInputs;
+    #endregion
 
-    public void ToggleSpreadMode()
-    {
-        int NextSpreadMode = (int)CurrentSpreadMode++;
-        NextSpreadMode = NextSpreadMode > 4 ? 0 : NextSpreadMode;
-        SetSpreadMode((SpreadMode)NextSpreadMode);
-    }
-
-    public void SetSpreadMode(SpreadMode Mode)
-    {
-        CurrentSpreadMode = Mode;
-    }
-
+    #region Initialization
     protected override void Awake()
     {
         base.Awake();
         CurrentSpreadMode = StartSpreadMode;
         SetCubes();
     }
-
+    protected override void Start()
+    {
+        base.Start();
+        InitializeCubes();
+        UpdateActiveCubes();
+    }
+    private void OnEnable()
+    {
+        if (PlayerInputs != null)
+            PlayerInputs.Enable();
+    }
+    private void OnDisable()
+    {
+        if (PlayerInputs != null)
+            PlayerInputs.Disable();
+    }
     public void InitializeAstroid(TriggerSide side)
     {
         Side = side;
@@ -97,24 +103,76 @@ public class Astroid : GunnerTrigger, IAstroidActions
         }
         PlayerInputs.Astroid.Reload.performed += ctx => OnReload(ctx);
     }
-
-    protected override void Start()
+    private void InitializeCubes()
     {
-        base.Start();
+        foreach (AstroidCube cube in Cubes)
+        {
+            cube.Initialize();
+        }
+    }
+    #endregion
+
+    #region Debug / Helpers
+    public void OnDrawGizmos()
+    {
+        if (DrawPathways)
+        {
+            SetCubes();
+            foreach (AstroidCube cube in Cubes)
+            {
+                cube.SetDraw(DrawPathways, DrawDirectedPathways, DrawConstantPathways, DrawOutwardPathways, DrawWidePathways);
+            }
+        }
+    }
+    public void CreateNewAstroid()
+    {
+        AstroidCube[] CubesArr = CubeParent.GetComponentsInChildren<AstroidCube>(includeInactive: true);
+        foreach (AstroidCube cube in CubesArr)
+        {
+            cube.ReturnPathways();
+            cube.DestroyCubeNow();
+        }
+
+        for (int x = 1; x <= MaxCubeSize; x++)
+        {
+            for (int y = 1; y <= MaxCubeSize; y++)
+            {
+                for (int z = 1; z <= MaxCubeSize; z++)
+                {
+                    AstroidCube NewCube = Instantiate(CubePrefab, CubeParent).GetComponentInChildren<AstroidCube>();
+                    NewCube.AstroidIndexPosition = new Vector3Int(x, y, z);
+                    NewCube.SetInitialPosition();
+                }
+            }
+        }
+    }
+    public void ReturnPathways()
+    {
+        SetCubes();
         InitializeCubes();
-        UpdateActiveCubes();
+        foreach (AstroidCube Cube in Cubes)
+        {
+            if (!Cube.gameObject.activeSelf)
+            {
+                //Debug.Log("Turn Cube Back On");
+                Cube.gameObject.SetActive(true);
+            }
+            Cube.ReturnPathways();
+        }
+    }
+    #endregion
+
+    #region Control
+    public void ToggleSpreadMode()
+    {
+        int NextSpreadMode = (int)CurrentSpreadMode++;
+        NextSpreadMode = NextSpreadMode > 4 ? 0 : NextSpreadMode;
+        SetSpreadMode((SpreadMode)NextSpreadMode);
     }
 
-    private void OnEnable()
+    public void SetSpreadMode(SpreadMode Mode)
     {
-        if (PlayerInputs != null)
-            PlayerInputs.Enable();
-    }
-
-    private void OnDisable()
-    {
-        if (PlayerInputs != null)
-            PlayerInputs.Disable();
+        CurrentSpreadMode = Mode;
     }
 
     public void UpdateTriggerInfo()
@@ -126,26 +184,6 @@ public class Astroid : GunnerTrigger, IAstroidActions
         foreach(AstroidCube cube in ActiveCubes)
         {
             cube.Fire = true;
-        }
-    }
-
-    private void InitializeCubes()
-    {
-        foreach (AstroidCube cube in Cubes)
-        {
-            cube.Initialize();
-        }
-    }
-
-    public void OnDrawGizmos()
-    {
-        if (DrawPathways)
-        {
-            SetCubes();
-            foreach (AstroidCube cube in Cubes)
-            {
-                cube.SetDraw(DrawPathways, DrawDirectedPathways, DrawConstantPathways, DrawOutwardPathways, DrawWidePathways);
-            }
         }
     }
 
@@ -201,44 +239,6 @@ public class Astroid : GunnerTrigger, IAstroidActions
         UpdateActiveCubes();
     }
 
-    public void ReturnPathways()
-    {
-        SetCubes();
-        InitializeCubes();
-        foreach (AstroidCube Cube in Cubes)
-        {
-            if (!Cube.gameObject.activeSelf)
-            {
-                //Debug.Log("Turn Cube Back On");
-                Cube.gameObject.SetActive(true);
-            }
-            Cube.ReturnPathways();
-        }
-    }
-
-    public void CreateNewAstroid()
-    {
-        AstroidCube[] CubesArr = CubeParent.GetComponentsInChildren<AstroidCube>(includeInactive: true);
-        foreach (AstroidCube cube in CubesArr)
-        {
-            cube.ReturnPathways();
-            cube.DestroyCubeNow();
-        }
-
-        for (int x = 1; x <= MaxCubeSize; x++)
-        {
-            for (int y = 1; y <= MaxCubeSize; y++)
-            {
-                for (int z = 1; z <= MaxCubeSize; z++)
-                {
-                    AstroidCube NewCube = Instantiate(CubePrefab, CubeParent).GetComponentInChildren<AstroidCube>();
-                    NewCube.AstroidIndexPosition = new Vector3Int(x, y, z);
-                    NewCube.SetInitialPosition();
-                }
-            }
-        }
-    }
-
     public void OnAstroidChargeMainTrigger(InputAction.CallbackContext context)
     {
         
@@ -273,6 +273,7 @@ public class Astroid : GunnerTrigger, IAstroidActions
     {
         
     }
+    #endregion
 }
 
 namespace FPS.Enums
