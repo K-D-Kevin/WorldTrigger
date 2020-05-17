@@ -95,8 +95,8 @@ public class MovementControls : Agent, IPlayerActions
         float sprintmult;
         sprintmult = Sprinting ? SprintMultiplier : 1;
         float Length = MovementDirection.magnitude;
-        MovementVector.x = MovementDirection.x * GameClock.DeltaTime / Length;
-        MovementVector.z = MovementDirection.z * sprintmult * GameClock.DeltaTime / Length;
+        MovementVector.x = MovementDirection.x / Length;
+        MovementVector.z = MovementDirection.z * sprintmult / Length;
         CurrentMovementSpeed.Direction = MovementDirection;
         Controls.Move(CurrentMovementSpeed);
     }

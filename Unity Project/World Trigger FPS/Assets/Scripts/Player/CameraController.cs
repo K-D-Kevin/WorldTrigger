@@ -19,7 +19,8 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private Camera Cam;
     private Transform EntityTransform;
-    private Transform CameraTransform;
+    [SerializeField]
+    private Transform EyeTransform;
 
     // Variables
     protected float EyePitch = 0;
@@ -29,8 +30,10 @@ public class CameraController : MonoBehaviour
     protected virtual void Awake()
     {
         EntityTransform = EntityAgent.transform;
-        CameraTransform = Cam.transform;
         UpdateInverse(InverseY);
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public void MouseMoveCamera(Vector2 Inputs)
@@ -56,7 +59,7 @@ public class CameraController : MonoBehaviour
         EntityTransform.Rotate(new Vector3(0, EyeYaw, 0), Space.World);
         CameraRotation.x += EyePitch;
         CameraRotation.x = Mathf.Clamp(CameraRotation.x, -90, 90);
-        CameraTransform.localEulerAngles = CameraRotation;
+        EyeTransform.localEulerAngles = CameraRotation;
     }
 
     float LocalAngleX(Transform obj, Transform Parent)

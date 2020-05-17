@@ -52,4 +52,8 @@ public class BodyParts : MonoBehaviour
     [SerializeField]
     private JumpCollider JumpHelper;
     public JumpCollider PlayerJumpHelper { get { return JumpHelper; } }
+
+    [SerializeField]
+    private TriggerList ListOfTriggers;
+    public TriggerList TriggerList { get { return ListOfTriggers; } }
 }
