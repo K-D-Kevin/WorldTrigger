@@ -30,7 +30,11 @@ public class TriggerInterface : MonoBehaviour, ITrigger
 
     [SerializeField]
     protected HoldType TypeOfHold;
-    public HoldType Hold { get { return TypeOfHold; } }
+    public HoldType PossibleHolds { get { return TypeOfHold; } }
+
+    [SerializeField]
+    protected HoldType SetHold;
+    public HoldType Hold { get { return SetHold; } }
 
     protected TriggerSide SideOfTrigger;
     public TriggerSide Side { get { return SideOfTrigger; } set { SideOfTrigger = value; } }
@@ -156,6 +160,8 @@ namespace FPS.Enums
         TwoHanded, // Requires both hands to use - Unequips the other single or dual wield weapons
         NoHanded, // Can be used when both hands are full
         Passive, // ActivAted automatically
+        LeftHanded, // Dual or Single Hold, But set to the left
+        RightHanded, // Dual or Single Hold, But set to the Right
     }
 
     public enum TriggerSide

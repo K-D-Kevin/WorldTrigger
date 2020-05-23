@@ -81,6 +81,7 @@ MonoBehaviour:
   RebuildCost: 50
   TypeOfTrigger: 1
   TypeOfHold: 1
+  SetHold: 1
   HealthState: 0
   TypeOfGunner: 0
   TypeOfFireArm: 0
