@@ -13,4 +13,44 @@ MonoBehaviour:
   m_Name: Tips
   m_EditorClassIdentifier: 
   NumberOfTipsToRemember: 5
-  LoadingTips: []
+  LoadingTips:
+  - Tip: Tip 1
+    TipImage: {fileID: 21300000, guid: b3abce7efa3854a4cb1dd6b47f553027, type: 3}
+  - Tip: Tip 2
+    TipImage: {fileID: 21300000, guid: b3abce7efa3854a4cb1dd6b47f553027, type: 3}
+  - Tip: Tip 3
+    TipImage: {fileID: 21300000, guid: b3abce7efa3854a4cb1dd6b47f553027, type: 3}
+  - Tip: Tip 4
+    TipImage: {fileID: 21300000, guid: b3abce7efa3854a4cb1dd6b47f553027, type: 3}
+  - Tip: Tip 5
+    TipImage: {fileID: 21300000, guid: b3abce7efa3854a4cb1dd6b47f553027, type: 3}
+  - Tip: Tip 6
+    TipImage: {fileID: 21300000, guid: b3abce7efa3854a4cb1dd6b47f553027, type: 3}
+  - Tip: Tip 7
+    TipImage: {fileID: 21300000, guid: b3abce7efa3854a4cb1dd6b47f553027, type: 3}
+  - Tip: Tip 8
+    TipImage: {fileID: 21300000, guid: b3abce7efa3854a4cb1dd6b47f553027, type: 3}
+  - Tip: Tip 9
+    TipImage: {fileID: 21300000, guid: b3abce7efa3854a4cb1dd6b47f553027, type: 3}
+  - Tip: Tip 10
+    TipImage: {fileID: 21300000, guid: b3abce7efa3854a4cb1dd6b47f553027, type: 3}
+  - Tip: Tip 11
+    TipImage: {fileID: 21300000, guid: b3abce7efa3854a4cb1dd6b47f553027, type: 3}
+  - Tip: Tip 12
+    TipImage: {fileID: 21300000, guid: b3abce7efa3854a4cb1dd6b47f553027, type: 3}
+  - Tip: Tip 13
+    TipImage: {fileID: 21300000, guid: b3abce7efa3854a4cb1dd6b47f553027, type: 3}
+  - Tip: Tip 14
+    TipImage: {fileID: 21300000, guid: b3abce7efa3854a4cb1dd6b47f553027, type: 3}
+  - Tip: Tip 15
+    TipImage: {fileID: 21300000, guid: b3abce7efa3854a4cb1dd6b47f553027, type: 3}
+  - Tip: Tip 16
+    TipImage: {fileID: 21300000, guid: b3abce7efa3854a4cb1dd6b47f553027, type: 3}
+  - Tip: Tip 17
+    TipImage: {fileID: 21300000, guid: b3abce7efa3854a4cb1dd6b47f553027, type: 3}
+  - Tip: Tip 18
+    TipImage: {fileID: 21300000, guid: b3abce7efa3854a4cb1dd6b47f553027, type: 3}
+  - Tip: Tip 19
+    TipImage: {fileID: 21300000, guid: b3abce7efa3854a4cb1dd6b47f553027, type: 3}
+  - Tip: Tip 20
+    TipImage: {fileID: 21300000, guid: b3abce7efa3854a4cb1dd6b47f553027, type: 3}

@@ -812,7 +812,7 @@ MonoBehaviour:
   WaitTime: 0.75
   TweenTypeToBlack: 1
   TweenTypeToImage: 1
-  UseTimer: 1
+  UseTimer: 0
   FadeImage: {fileID: 300591737}
   TimerText: {fileID: 1175337623}
 --- !u!1 &1830947099
