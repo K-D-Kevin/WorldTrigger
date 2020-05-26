@@ -84,6 +84,7 @@ public class Astroid : GunnerTrigger, IAstroidActions
         if (PlayerInputs != null)
             PlayerInputs.Disable();
     }
+
     public void InitializeAstroid(TriggerSide side)
     {
         Side = side;
@@ -179,6 +180,7 @@ public class Astroid : GunnerTrigger, IAstroidActions
     {
         TriggerInfo = DataManager.GetGunnerTriggerInfo(TypeOfGunner, TypeOfFireArm);
     }
+
     public override void Fire()
     {
         foreach(AstroidCube cube in ActiveCubes)
