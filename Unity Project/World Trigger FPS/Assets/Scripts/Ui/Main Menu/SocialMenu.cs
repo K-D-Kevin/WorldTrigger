@@ -23,6 +23,11 @@ public class SocialMenu : MonoBehaviour
 
     }
 
+    public void OpenSocialPageOnPlayerProfile()
+    {
+
+    }
+
     public void OpenMainMenu()
     {
         MainMenuManager.OpenMainMenuPage();

@@ -77,4 +77,38 @@ public class PlayerProfile : ScriptableObject
 
     #region Audio
     #endregion
+
+    #region Stats
+
+    #region Visible
+
+    #region MMR
+    #endregion
+
+    #region GunnerTriggers
+
+    #region Astroid
+    #endregion
+
+
+    #endregion
+
+    #endregion
+
+    #region InVisible
+
+    #region MMR
+    #endregion
+
+    #region GunnerTriggers
+
+    #region Astroid
+    #endregion
+
+
+    #endregion
+
+    #endregion
+
+    #endregion
 }
