@@ -56,6 +56,7 @@ public class SmartButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     // Functions
     public void OnPointerEnter(PointerEventData eventData)
     {
+        Debug.Log("On Point Enter: " + name);
         if (ButtonManager != null)
         {
             ButtonManager.CurrentSmartButton = this;
@@ -69,12 +70,14 @@ public class SmartButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        Debug.Log("On Point Exit: " + name);
         if (ButtonManager == null)
             HoverExitButton();
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        Debug.Log("On Point Click: " + name);
         InvokeButton();
     }
 

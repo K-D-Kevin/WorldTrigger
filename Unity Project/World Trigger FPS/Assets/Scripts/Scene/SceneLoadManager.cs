@@ -27,6 +27,8 @@ public class SceneLoadManager : MonoBehaviour
     private Image TipImage;
     [SerializeField]
     private RectTransform TipFadeObject;
+    [SerializeField]
+    private Canvas SceneLoaderCanvas;
 
     // Loading
     [SerializeField]
@@ -61,7 +63,7 @@ public class SceneLoadManager : MonoBehaviour
             DontDestroyOnLoad(this);
         }
 
-        LeanTween.alpha(FadeObject, 0, AutomaticTipFadeTime).setEase(AutomaticTipTweenType);
+        LeanTween.alpha(FadeObject, 0, AutomaticTipFadeTime).setEase(AutomaticTipTweenType).setOnComplete(MinSortOrder);
     }
 
     public void LoadGameScene(string SceneName)
@@ -73,6 +75,8 @@ public class SceneLoadManager : MonoBehaviour
     private IEnumerator IE_LoadGameScene()
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(SceneToLoad);
+        Debug.Log("Load Scene; " + SceneToLoad);
+        SceneLoaderCanvas.sortingOrder = 100;
         LeanTween.alpha(FadeObject, 1, AutomaticTipFadeTime).setEase(AutomaticTipTweenType).setOnComplete(OnLoadStart);
 
         // Wait until the asynchronous scene fully loads
@@ -94,7 +98,10 @@ public class SceneLoadManager : MonoBehaviour
         LeanTween.alpha(FadeObject, 1, AutomaticTipFadeTime).setEase(AutomaticTipTweenType).setOnComplete(OnLoadComplete);
     }
 
-
+    public void MinSortOrder()
+    {
+        SceneLoaderCanvas.sortingOrder = 0;
+    }
 
     public void OnLoadStart()
     {
@@ -106,6 +113,7 @@ public class SceneLoadManager : MonoBehaviour
     public void OnLoadComplete()
     {
         LoadObjectsTurn(false);
+        SceneLoaderCanvas.sortingOrder = 0;
     }
 
     private void LoadNewTip()

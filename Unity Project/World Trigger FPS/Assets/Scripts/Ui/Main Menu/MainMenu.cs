@@ -134,6 +134,18 @@ public class MainMenu : MonoBehaviour
         SettingsOnOff.gameObject.SetActive(false);
     }
 
+    public void OpenSocialPageOnPlayerProfile()
+    {
+        SocialOnOff.gameObject.SetActive(true);
+        SocialMenuManager.OpenSocialMenuOnInvite();
+        MainMenuOnOff.gameObject.SetActive(false);
+        CampaignOnOff.gameObject.SetActive(false);
+        PlayOnOff.gameObject.SetActive(false);
+        LoadoutsOnOff.gameObject.SetActive(false);
+        CharacterOnOff.gameObject.SetActive(false);
+        SettingsOnOff.gameObject.SetActive(false);
+    }
+
     public void OpenSettingsPage()
     {
         SettingsOnOff.gameObject.SetActive(true);
